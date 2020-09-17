@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<plugin id="cordova-plugin-mopub-ios-interstitial" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Cordova MoPub Plugin (iOS and Interstitial only)</name>
+
+    <description>WIP: Easy to use Cordova MoPub plugin for iOS (Interstitial only).</description>
+
+    <author>XavM</author>
+
+    <license>MIT</license>
+
+    <keywords>mopub, interstitial, cordova-ios, ecosystem:cordova, ios,
+        money, monetization, advertisment, advertising,
+        ads, ad
+    </keywords>
+
+    <js-module name="mopub" src="src/js/mopub.js">
+        <clobbers target="mopub" />
+    </js-module>
+
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="mopub">
+                <param name="ios-package" value="CDVMoPub" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVMoPub.h" />
+        <source-file src="src/ios/CDVMoPub.m" />
+
+        <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org/"/>
+            </config>
+            <pods>
+                <pod name="mopub-ios-sdk" spec="~> 5.13" />
+            </pods>
+        </podspec>
+
+    </platform>
+
+</plugin>

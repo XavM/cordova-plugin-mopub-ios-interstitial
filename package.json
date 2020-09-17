@@ -1,0 +1,17 @@
+{
+  "name": "cordova-plugin-mopub-ios-interstitial",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "cordova-plugin-mopub-ios-interstitial",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "author": "",
+  "license": "ISC"
+}
