@@ -1,17 +1,27 @@
 {
   "name": "cordova-plugin-mopub-ios-interstitial",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "WIP: Easy to use Cordova MoPub plugin for iOS (Interstitial only).",
   "cordova": {
     "id": "cordova-plugin-mopub-ios-interstitial",
     "platforms": [
       "ios"
     ]
   },
+  "homepage": "https://github.com/XavM/cordova-plugin-mopub-ios-interstitial",
+  "repository": "https://github.com/XavM/cordova-plugin-mopub-ios-interstitial",
   "keywords": [
     "ecosystem:cordova",
-    "cordova-ios"
+    "cordova-ios",
+    "mopub",
+    "ios",
+    "interstitial",
+    "monetization",
+    "advertisment",
+    "advertising",
+    "ads",
+    "ad"
   ],
-  "author": "",
-  "license": "ISC"
+  "author": "XavM",
+  "license": "MIT"
 }

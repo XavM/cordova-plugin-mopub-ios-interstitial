@@ -2,6 +2,15 @@
 
 WIP: Easy to use Cordova MoPub plugin for iOS (interstitial only).
 
+## PreReqs
+
+	# Cocoapods is used to download the official mopub-ios-sdk (v5.13 As of Sept 2020)
+	sudo gem install cocoapods
+
+## Install 
+
+	cordova plugins add https://github.com/XavM/cordova-plugin-mopub-ios-interstitial
+
 ## How to use Examples
 
 ### All steps (in order)
@@ -22,7 +31,7 @@ WIP: Easy to use Cordova MoPub plugin for iOS (interstitial only).
 	await mopub.isInterstitialReady()
 	await mopub.showInterstitial()
 
-### Show interstitial when ready using eventListener
+### Show interstitial when ready using: eventListener
 
 	document.addEventListener('mopub.sdk.interstitialDidLoadAd', async (evt) => {
 	  console.log(evt.type, evt.adUnitId)
@@ -43,10 +52,10 @@ WIP: Easy to use Cordova MoPub plugin for iOS (interstitial only).
 
 	await mopub.loadInterstitial(adUnit)
 
-	// Turn off autoShow
+	// Turn off autoShow if/when necessary
 	mopub.autoShow = false
 
-### Show interstitial when ready using await mopub.isInterstitialReady()
+### Show interstitial when ready using: await mopub.isInterstitialReady()
 
 	var adUnit = '4f117153f5c24fa6a3a92b818a5eb630'
 
@@ -81,7 +90,7 @@ WIP: Easy to use Cordova MoPub plugin for iOS (interstitial only).
 
 	await mopub.loadInterstitial(adUnit)
 
-	// Turn off debug messages
+	// Turn off debug messages if/when necessary
 	mopub.autoShow = true
 
 ## Availaible events you can attach to : 

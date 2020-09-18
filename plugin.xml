@@ -11,9 +11,15 @@
     <license>MIT</license>
 
     <keywords>mopub, interstitial, cordova-ios, ecosystem:cordova, ios,
-        money, monetization, advertisment, advertising,
+        monetization, advertisment, advertising,
         ads, ad
     </keywords>
+
+    <repo>https://github.com/XavM/cordova-plugin-mopub-ios-interstitial</repo>
+
+    <engines>
+        <engine name="cordova-ios" version=">=6.1.1" />
+    </engines>
 
     <js-module name="mopub" src="src/js/mopub.js">
         <clobbers target="mopub" />
