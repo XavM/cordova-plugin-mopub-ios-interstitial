@@ -1,119 +1,137 @@
 var exec = require('cordova/exec');
 
-const mopub = {
-  _debug: false,
-  get debug() {
-    return this._debug
-  },
-  set debug(value) {
 
-    if (![true, false].includes(value))
-      throw 'error'
+/*
 
-    this._debug = value
+function Mopub(){
 
-    if (value)
-      Object.keys(this.eventListeners).forEach((event) => {
-        document.addEventListener('mopub.sdk.' + event, this.eventListeners[event])
-        this.attachedEventListeners[event] = true
-      })
-    else
-      Object.keys(this.attachedEventListeners).forEach((event) => {
+  var _debug = false 
 
-        if (   this.attachedEventListeners[event]
-            && (     event != 'interstitialDidLoadAd'
-                || ( event == 'interstitialDidLoadAd' && !this.autoShow )
-               )
-           ) {
-          document.removeEventListener('mopub.sdk.' + event, this.eventListeners[event])
-          this.attachedEventListeners[event] = false
-        }
-      })
-  },
-  _autoShow: false,
-  get autoShow() {
-    return this._autoShow
-  },
-  set autoShow(value) {
-
-    if (![true, false].includes(value))
-      throw 'error'
-
-    this._autoShow = value
-
-    if (value) {
-      document.addEventListener('mopub.sdk.interstitialDidLoadAd', this.eventListeners.interstitialDidLoadAd)
-      this.attachedEventListeners[event] = true
+  Object.defineProperty(this, "debug", {
+    get: function(){
+      return _debug
+    },
+    set: function(val){
+      _debug = val
     }
-    else if (!this.debug) {
-      document.removeEventListener('mopub.sdk.interstitialDidLoadAd', this.eventListeners.interstitialDidLoadAd)
-      this.attachedEventListeners[event] = false
+  })
+
+  var _autoShow = false 
+
+  Object.defineProperty(this, "autoShow", {
+    get: function(){
+      return _autoShow
+    },
+    set: function(val){
+      _autoShow = val
     }
-  },
-  attachedEventListeners: { 'isInitialized': false, 'loadInterstitial': false, 'interstitialNotReady': false, 'interstitialDidLoadAd': false, 'interstitialDidFailToLoadAd': false, 'interstitialWillAppear': false, 'interstitialDidAppear': false, 'interstitialDidReceiveTapEvent': false, 'interstitialWillDisappear': false, 'interstitialDidDisappear': false, 'interstitialDidExpire': false },
-  eventListeners: {},
-
-  isSdkInitialized: function() {
-    return new Promise((resolve, reject) => {
-      exec(resolve, reject, 'mopub', 'isSdkInitialized', [])
-    })    
-  },
-
-  init: function(adUnitId) {
-    return new Promise((resolve, reject) => {
-      exec(resolve, reject, 'mopub', 'init', [adUnitId])
-    })    
-  },
-
-  loadInterstitial: function(adUnitId) {
-
-    return new Promise(async (resolve, reject) => {
-
-      var isSdkInitialized = await mopub.isSdkInitialized()
-
-      if (!isSdkInitialized) 
-        await mopub.init(adUnitId)
-
-      exec(resolve, reject, 'mopub', 'loadInterstitial', [adUnitId])
-    })
-  },
-
-  loadInterstitial_Old: function(adUnitId, autoShow) {
-
-    return new Promise(async (resolve, reject) => {
-
-      var isSdkInitialized = await mopub.isSdkInitialized()
-
-      if (!isSdkInitialized) 
-        await mopub.init(adUnitId)
-
-      exec(
-        () => {
-          if (autoShow)
-            document.addEventListener('mopub.sdk.interstitialDidLoadAd', (evt) => {
-              console.log('---->', evt.type);
-              mopub.showInterstitial(resolve, reject)
-            }, {once: autoShow})
-          else
-            resolve
-        },
-        reject, 'mopub', 'loadInterstitial', [adUnitId])
-    })
-  },
-
-  isInterstitialReady: function () {
-    return new Promise(async (resolve, reject) => {
-      exec(resolve, reject, 'mopub', 'isInterstitialReady', [])
-    })
-  },
-
-  showInterstitial: function () {
-    return new Promise(async (resolve, reject) => {
-      exec(resolve, reject, 'mopub', 'showInterstitial', [])
-    })
-  },
+  })
 
 }
+
+var mopub = new Mopub();
+
+*/
+
+function Mopub(){
+
+  var _debug = false,
+      _autoShow = false 
+
+  var obj = {
+
+    get debug() {
+      return _debug
+    },
+    set debug(value) {
+
+      if (![true, false].includes(value))
+        throw 'error'
+
+      _debug = value
+
+      if (value)
+        Object.keys(this.eventListeners).forEach((event) => {
+          document.addEventListener('mopub.sdk.' + event, this.eventListeners[event])
+          this.attachedEventListeners[event] = true
+        })
+      else
+        Object.keys(this.attachedEventListeners).forEach((event) => {
+
+          if (   this.attachedEventListeners[event]
+              && (     event != 'interstitialDidLoadAd'
+                  || ( event == 'interstitialDidLoadAd' && !this.autoShow )
+                 )
+             ) {
+            document.removeEventListener('mopub.sdk.' + event, this.eventListeners[event])
+            this.attachedEventListeners[event] = false
+          }
+        })
+    },
+    get autoShow() {
+      return _autoShow
+    },
+    set autoShow(value) {
+
+      if (![true, false].includes(value))
+        throw 'error'
+
+      _autoShow = value
+
+      if (value) {
+        document.addEventListener('mopub.sdk.interstitialDidLoadAd', this.eventListeners.interstitialDidLoadAd)
+        this.attachedEventListeners[event] = true
+      }
+      else if (!this.debug) {
+        document.removeEventListener('mopub.sdk.interstitialDidLoadAd', this.eventListeners.interstitialDidLoadAd)
+        this.attachedEventListeners[event] = false
+      }
+    },
+    attachedEventListeners: { 'isInitialized': false, 'loadInterstitial': false, 'interstitialNotReady': false, 'interstitialDidLoadAd': false, 'interstitialDidFailToLoadAd': false, 'interstitialWillAppear': false, 'interstitialDidAppear': false, 'interstitialDidReceiveTapEvent': false, 'interstitialWillDisappear': false, 'interstitialDidDisappear': false, 'interstitialDidExpire': false },
+    eventListeners: {},
+
+    isSdkInitialized: function() {
+      return new Promise((resolve, reject) => {
+        exec(resolve, reject, 'mopub', 'isSdkInitialized', [])
+      })    
+    },
+
+    init: function(adUnitId) {
+      return new Promise((resolve, reject) => {
+        exec(resolve, reject, 'mopub', 'init', [adUnitId])
+      })    
+    },
+
+    loadInterstitial: function(adUnitId) {
+
+      return new Promise(async (resolve, reject) => {
+
+        var isSdkInitialized = await mopub.isSdkInitialized()
+
+        if (!isSdkInitialized) 
+          await mopub.init(adUnitId)
+
+        exec(resolve, reject, 'mopub', 'loadInterstitial', [adUnitId])
+      })
+    },
+
+    isInterstitialReady: function () {
+      return new Promise(async (resolve, reject) => {
+        exec(resolve, reject, 'mopub', 'isInterstitialReady', [])
+      })
+    },
+
+    showInterstitial: function () {
+      return new Promise(async (resolve, reject) => {
+        exec(resolve, reject, 'mopub', 'showInterstitial', [])
+      })
+    }
+  }
+
+  return obj
+}
+
+var mopub = new Mopub();
 
 mopub.eventListeners = Object.keys(mopub.attachedEventListeners).reduce((prev, event) => {
   if (event == 'interstitialDidLoadAd')
@@ -124,7 +142,6 @@ mopub.eventListeners = Object.keys(mopub.attachedEventListeners).reduce((prev, e
 }, {})
 
 module.exports = mopub 
-
 
 /*
 
@@ -226,5 +243,10 @@ document.addEventListener('mopub.sdk.interstitialDidLoadAd', (evt) => {
 });
 
 await mopub.loadInterstitialP2(adUnit, true)
+
+---
+
+var adUnit = '4f117153f5c24fa6a3a92b818a5eb630'
+await mopub.loadInterstitial(adUnit)
 
 */
