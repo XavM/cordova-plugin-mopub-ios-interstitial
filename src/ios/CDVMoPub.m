@@ -63,11 +63,11 @@
 
     NSLog(@"MoPub SDK loadInterstitial with adUnit %@", AD_UNIT_ID);
 
-    NSString* js;
-    js = [NSString stringWithFormat:@"javascript:cordova.fireDocumentEvent('mopub.sdk.loadInterstitial', { \"adUnitId\": \"%@\" });", AD_UNIT_ID];
-    [self.commandDelegate evalJs:js];
-
     if ([MoPub sharedInstance].isSdkInitialized) {
+
+        NSString* js;
+        js = [NSString stringWithFormat:@"javascript:cordova.fireDocumentEvent('mopub.sdk.loadInterstitial', { \"adUnitId\": \"%@\" });", AD_UNIT_ID];
+        [self.commandDelegate evalJs:js];
 
         // Instantiate the interstitial using the class convenience method.
         self.interstitial = [MPInterstitialAdController
