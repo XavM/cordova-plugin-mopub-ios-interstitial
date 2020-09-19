@@ -13,7 +13,7 @@ function Mopub(){
     set debug(value) {
 
       if (![true, false].includes(value))
-        throw 'error'
+        throw 'error: allowed values are true, false'
 
       _debug = value
 
@@ -41,7 +41,7 @@ function Mopub(){
     set autoShow(value) {
 
       if (![true, false].includes(value))
-        throw 'error'
+        throw 'error: allowed values are true, false'
 
       _autoShow = value
 

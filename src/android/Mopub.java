@@ -51,7 +51,7 @@ public class Mopub extends CordovaPlugin {
 
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-      super.initialize(cordova, webView);
+    super.initialize(cordova, webView);
   }
 
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -76,14 +76,13 @@ public class Mopub extends CordovaPlugin {
 
                 Log.d("MoPub SDK", "initialized");
 
-                // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-                //JSONObject data = new JSONObject();
-                //try {
-                //  data.put("adUnitId",  AD_UNIT_ID);
-                //} catch (JSONException e) {
-                //  e.printStackTrace();
-                //}
-                //fireAdEvent("mopub.sdk.isInitialized", data);
+                JSONObject data = new JSONObject();
+                try {
+                  data.put("adUnitId",  AD_UNIT_ID);
+                } catch (JSONException e) {
+                  e.printStackTrace();
+                }
+                fireAdEvent("mopub.sdk.isInitialized", data);
 
                 callbackContext.success(AD_UNIT_ID);
               }
@@ -125,43 +124,37 @@ public class Mopub extends CordovaPlugin {
             } catch (JSONException e) {
               e.printStackTrace();
             }
-            // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-            //fireAdEvent("mopub.sdk.interstitialDidLoadAd", data);
+            fireAdEvent("mopub.sdk.interstitialDidLoadAd", data);
           }
           @Override
           public void onInterstitialFailed(MoPubInterstitial interstitial, MoPubErrorCode errorCode) {
             Log.d("MoPub SDK", "onInterstitialFailed");
-            // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-            //fireAdEvent("mopub.sdk.interstitialDidFailToLoadAd");
+            fireAdEvent("mopub.sdk.interstitialDidFailToLoadAd");
           }
           @Override
           public void onInterstitialShown(MoPubInterstitial interstitial) {
             Log.d("MoPub SDK", "onInterstitialShown");
-            // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-            //fireAdEvent("mopub.sdk.interstitialDidAppear");
+            fireAdEvent("mopub.sdk.interstitialDidAppear");
           }
           @Override
           public void onInterstitialClicked(MoPubInterstitial interstitial) {
             Log.d("MoPub SDK", "onInterstitialClicked");
-            // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-            //fireAdEvent("mopub.sdk.interstitialDidReceiveTapEvent");
+            fireAdEvent("mopub.sdk.interstitialDidReceiveTapEvent");
           }
           @Override
           public void onInterstitialDismissed(MoPubInterstitial interstitial) {
             Log.d("MoPub SDK", "onInterstitialDismissed");
-            // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-            //fireAdEvent("mopub.sdk.interstitialDidDisappear");
+            fireAdEvent("mopub.sdk.interstitialDidDisappear");
           }
         });
 
-        // FIXME: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
-        //JSONObject data = new JSONObject();
-        //try {
-        //  data.put("adUnitId",  mInterstitial.getAdUnitId());
-        //} catch (JSONException e) {
-        //  e.printStackTrace();
-        //}
-        //fireAdEvent("mopub.sdk.loadInterstitial", data);
+        JSONObject data = new JSONObject();
+        try {
+          data.put("adUnitId",  mInterstitial.getAdUnitId());
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+        fireAdEvent("mopub.sdk.loadInterstitial", data);
 
         mInterstitial.load();
 
@@ -246,7 +239,13 @@ public class Mopub extends CordovaPlugin {
   }
 
   private void loadJS(String js) {
-    webView.loadUrl(js);
+
+    // FIX: A WebView method was called on thread 'JavaBridge'. All WebView methods must be called on the same thread.
+    cordova.getActivity().runOnUiThread(new Runnable() {
+      public void run() {
+        webView.loadUrl(js);
+      }
+    });
   }
 
 }
