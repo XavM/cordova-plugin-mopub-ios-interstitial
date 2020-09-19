@@ -83,7 +83,7 @@
 
     } else {
 
-        // The interstitial wasn't ready
+        // The SDK is not initialized
         NSLog(@"MoPub SDK is not initialized");
     
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"MoPub SDK is not initialized"];

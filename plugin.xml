@@ -25,6 +25,29 @@
         <clobbers target="mopub" />
     </js-module>
 
+    <!--
+    <dependency id="cordova-plugin-androidx" version=">=2.0.0" />
+    -->
+
+    <!-- It seams we need to add the AndroidXEnabled=true pref to the target cordova proj config.xml -->
+    <!--
+    <preference name="AndroidXEnabled" value="true" />
+    -->
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="mopub">
+                <param name="android-package" value="com.xavm.cordova.plugin.Mopub"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/Mopub.java" target-dir="src/com/xavm/cordova/plugin" />
+
+        <framework src="src/android/plugin.gradle"  custom="true" type="gradleReference"/>
+
+    </platform>
+
     <platform name="ios">
 
         <config-file target="config.xml" parent="/*">
