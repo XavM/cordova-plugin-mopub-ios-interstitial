@@ -157,14 +157,18 @@
                           withError:(NSError *)error {
 
     NSLog(@"MoPub SDK interstitialDidFailToLoadAd: %@", [error localizedDescription]);
-    [self.commandDelegate evalJs:@"javascript:cordova.fireDocumentEvent('mopub.sdk.interstitialDidFailToLoadAd');"];
+
+    js = [NSString stringWithFormat:@"javascript:cordova.fireDocumentEvent('mopub.sdk.interstitialDidLoadAd', { \"error\": \"%@\" });", [error localizedDescription]];
+    [self.commandDelegate evalJs:js];
 }
 
+/*
 - (void)interstitialWillAppear:(MPInterstitialAdController *)interstitial {
 
     NSLog(@"MoPub SDK interstitialWillAppear");
     [self.commandDelegate evalJs:@"javascript:cordova.fireDocumentEvent('mopub.sdk.interstitialWillAppear');"];
 }
+*/
 
 - (void)interstitialDidAppear:(MPInterstitialAdController *)interstitial {
 
@@ -172,11 +176,13 @@
     [self.commandDelegate evalJs:@"javascript:cordova.fireDocumentEvent('mopub.sdk.interstitialDidAppear');"];
 }
 
+/*
 - (void)interstitialWillDisappear:(MPInterstitialAdController *)interstitial {
 
     NSLog(@"MoPub SDK interstitialWillDisappear");
     [self.commandDelegate evalJs:@"javascript:cordova.fireDocumentEvent('mopub.sdk.interstitialWillDisappear');"];
 }
+*/
 
 - (void)interstitialDidDisappear:(MPInterstitialAdController *)interstitial {
 

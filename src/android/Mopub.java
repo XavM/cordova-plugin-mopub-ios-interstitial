@@ -43,6 +43,8 @@ public class Mopub extends CordovaPlugin {
     super.initialize(cordova, webView);
   }
 
+
+
   @Override
   public void onPause(boolean multitasking) {
     MoPub.onPause(cordova.getActivity());
@@ -141,8 +143,14 @@ public class Mopub extends CordovaPlugin {
           }
           @Override
           public void onInterstitialFailed(MoPubInterstitial interstitial, MoPubErrorCode errorCode) {
-            Log.d("MoPub SDK", "onInterstitialFailed");
-            fireAdEvent("mopub.sdk.interstitialDidFailToLoadAd");
+            Log.w("MoPub SDK", String.format("onInterstitialFailed: %s", errorCode.toString()));
+            JSONObject data = new JSONObject();
+            try {
+              data.put("error",  errorCode.toString());
+            } catch (JSONException e) {
+              e.printStackTrace();
+            }
+            fireAdEvent("mopub.sdk.interstitialDidFailToLoadAd", data);
           }
           @Override
           public void onInterstitialShown(MoPubInterstitial interstitial) {

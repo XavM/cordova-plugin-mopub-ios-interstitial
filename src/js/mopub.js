@@ -54,7 +54,7 @@ function Mopub(){
         this.attachedEventListeners[event] = false
       }
     },
-    attachedEventListeners: { 'isInitialized': false, 'loadInterstitial': false, 'interstitialNotReady': false, 'interstitialDidLoadAd': false, 'interstitialDidFailToLoadAd': false, 'interstitialWillAppear': false, 'interstitialDidAppear': false, 'interstitialDidReceiveTapEvent': false, 'interstitialWillDisappear': false, 'interstitialDidDisappear': false, 'interstitialDidExpire': false },
+    attachedEventListeners: { 'isInitialized': false, 'loadInterstitial': false, 'interstitialNotReady': false, 'interstitialDidLoadAd': false, 'interstitialDidFailToLoadAd': false, /*'interstitialWillAppear': false,*/ 'interstitialDidAppear': false, 'interstitialDidReceiveTapEvent': false, /*'interstitialWillDisappear': false,*/ 'interstitialDidDisappear': false, 'interstitialDidExpire': false },
     eventListeners: {},
 
     isSdkInitialized: function() {
