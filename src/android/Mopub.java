@@ -4,33 +4,22 @@ import com.mopub.common.MoPub;
 import com.mopub.common.SdkConfiguration;
 import com.mopub.common.SdkInitializationListener;
 import com.mopub.common.logging.MoPubLog;
+import com.mopub.mobileads.MoPubErrorCode;
+
+/* TODO: implement consent
 import com.mopub.common.privacy.ConsentData;
 import com.mopub.common.privacy.ConsentDialogListener;
 import com.mopub.common.privacy.ConsentStatus;
 import com.mopub.common.privacy.ConsentStatusChangeListener;
 import com.mopub.common.privacy.PersonalInfoManager;
-import com.mopub.common.util.DeviceUtils;
-import com.mopub.mobileads.MoPubConversionTracker;
-import com.mopub.mobileads.MoPubErrorCode;
-import com.mopub.network.ImpressionData;
-import com.mopub.network.ImpressionListener;
-import com.mopub.network.ImpressionsEmitter;
-
-import com.mopub.mobileads.MoPubView;
+*/
 
 import com.mopub.mobileads.MoPubInterstitial;
-
-import static com.mopub.common.logging.MoPubLog.LogLevel.DEBUG;
-import static com.mopub.common.logging.MoPubLog.LogLevel.INFO;
-
-import com.mopub.common.DefaultAdapterClasses;
-import com.mopub.mobileads.AdAdapter;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
-
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 
@@ -52,6 +41,30 @@ public class Mopub extends CordovaPlugin {
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
+  }
+
+  @Override
+  public void onPause(boolean multitasking) {
+    MoPub.onPause(cordova.getActivity());
+    super.onPause(multitasking);
+  }
+
+  @Override
+  public void onResume(boolean multitasking) {
+    MoPub.onResume(cordova.getActivity());
+    super.onResume(multitasking);
+  }
+
+  @Override
+  public void onStop() {
+    MoPub.onStop(cordova.getActivity());
+    super.onStop();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    mInterstitial.destroy();
   }
 
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {

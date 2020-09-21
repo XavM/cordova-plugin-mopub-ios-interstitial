@@ -19,13 +19,8 @@ dependencies {
     */
 
     // Use the Android Advertising ID instead of the device ID, as required by Google.
-    implementation('com.google.android.gms:play-services-ads-identifier') {
-        transitive = true
-    }
-
-    implementation('com.google.android.gms:play-services-base') {
-        transitive = true
-    }
+    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+    implementation 'com.google.android.gms:play-services-base:17.2.1'
 
 }
 
