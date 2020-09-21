@@ -6,7 +6,7 @@ import com.mopub.common.SdkInitializationListener;
 import com.mopub.common.logging.MoPubLog;
 import com.mopub.mobileads.MoPubErrorCode;
 
-/* TODO: implement consent
+/* WIP: Consent
 import com.mopub.common.privacy.ConsentData;
 import com.mopub.common.privacy.ConsentDialogListener;
 import com.mopub.common.privacy.ConsentStatus;
@@ -23,6 +23,9 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,14 +39,30 @@ import org.json.JSONObject;
  */
 public class Mopub extends CordovaPlugin {
 
+  private boolean mShowingConsentDialog;
   private MoPubInterstitial mInterstitial;
+
+  /* WIP: Consent
+  @Nullable
+  PersonalInfoManager mPersonalInfoManager;
+
+  @Nullable
+  private ConsentStatusChangeListener mConsentStatusChangeListener;
+  */
 
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+
+    /* WIP: Consent
+    mConsentStatusChangeListener = initConsentChangeListener();
+    mPersonalInfoManager = MoPub.getPersonalInformationManager();
+
+    if (mPersonalInfoManager != null) {
+      mPersonalInfoManager.subscribeConsentStatusChangeListener(mConsentStatusChangeListener);
+    }
+    */
     super.initialize(cordova, webView);
   }
-
-
 
   @Override
   public void onPause(boolean multitasking) {
@@ -114,6 +133,21 @@ public class Mopub extends CordovaPlugin {
         return false;
       }
     }
+
+    /* WIP: Consent
+    else if (action.equals("showConsentDialog")) {
+
+      if (mPersonalInfoManager != null && mPersonalInfoManager.shouldShowConsentDialog()) {
+        Log.d("MoPub SDK", "shouldShowConsentDialog: true");
+        mPersonalInfoManager.loadConsentDialog(initDialogLoadListener());
+      } else {
+        Log.d("MoPub SDK", "shouldShowConsentDialog: false");
+      }
+
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+      return true;
+    }
+    */
 
     else if (action.equals("isSdkInitialized")) {
       Log.d("MoPub SDK", "isSdkInitialized");
@@ -213,6 +247,47 @@ public class Mopub extends CordovaPlugin {
 
     return false;
   }
+
+  /* WIP: Consent
+  private ConsentStatusChangeListener initConsentChangeListener() {
+    return new ConsentStatusChangeListener() {
+
+      @Override
+      public void onConsentStateChange(@NonNull ConsentStatus oldConsentStatus,
+                                       @NonNull ConsentStatus newConsentStatus,
+                                       boolean canCollectPersonalInformation) {
+
+        Log.d("MoPub SDK", "onConsentStateChange");
+
+        if (mPersonalInfoManager != null && mPersonalInfoManager.shouldShowConsentDialog()) {
+          mPersonalInfoManager.loadConsentDialog(initDialogLoadListener());
+        }
+      }
+    };
+  }
+
+  private ConsentDialogListener initDialogLoadListener() {
+    return new ConsentDialogListener() {
+
+      @Override
+      public void onConsentDialogLoaded() {
+
+        Log.d("MoPub SDK", "onConsentDialogLoaded");
+
+        if (mPersonalInfoManager != null) {
+          mPersonalInfoManager.showConsentDialog();
+          mShowingConsentDialog = true;
+        }
+      }
+
+      @Override
+      public void onConsentDialogLoadFailed(@NonNull MoPubErrorCode moPubErrorCode) {
+        //Utils.logToast(MoPubSampleActivity.this, "Consent dialog failed to load.");
+      }
+    };
+  }
+
+  */
 
   private class CordovaEventBuilder {
 

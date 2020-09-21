@@ -2,15 +2,15 @@
 
 <plugin id="cordova-plugin-mopub-ios-interstitial" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <name>Cordova MoPub Plugin (iOS and Interstitial only)</name>
+    <name>Cordova MoPub Plugin (Interstitial only)</name>
 
-    <description>WIP: Easy to use Cordova MoPub plugin for iOS (Interstitial only).</description>
+    <description>WIP: Easy to use Cordova MoPub plugin (Interstitial only).</description>
 
     <author>XavM</author>
 
     <license>MIT</license>
 
-    <keywords>mopub, interstitial, cordova-ios, ecosystem:cordova, ios,
+    <keywords>mopub, interstitial, cordova-ios, cordova-android, ecosystem:cordova, ios, android,
         monetization, advertisment, advertising,
         ads, ad
     </keywords>
@@ -19,20 +19,12 @@
 
     <engines>
         <engine name="cordova-ios" version=">=6.1.1" />
+        <engine name="cordova-android" version=">=9.0.0" />
     </engines>
 
     <js-module name="mopub" src="src/js/mopub.js">
         <clobbers target="mopub" />
     </js-module>
-
-    <!--
-    <dependency id="cordova-plugin-androidx" version=">=2.0.0" />
-    -->
-
-    <!-- It seams we need to add the AndroidXEnabled=true pref to the target cordova proj config.xml -->
-    <!--
-    <preference name="AndroidXEnabled" value="true" />
-    -->
 
     <platform name="android">
 

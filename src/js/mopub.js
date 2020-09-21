@@ -69,6 +69,14 @@ function Mopub(){
       })    
     },
 
+    /* WIP: Consent
+    showConsentDialog: function() {
+      return new Promise((resolve, reject) => {
+        exec(resolve, reject, 'mopub', 'showConsentDialog', [])
+      })    
+    },
+    */
+
     loadInterstitial: function(adUnitId) {
 
       return new Promise(async (resolve, reject) => {
@@ -103,6 +111,8 @@ var mopub = new Mopub();
 mopub.eventListeners = Object.keys(mopub.attachedEventListeners).reduce((prev, event) => {
   if (event == 'interstitialDidLoadAd')
     prev[event] = (evt) => { console.log(evt.type); mopub.autoShow && mopub.showInterstitial() }
+  else if (event == 'interstitialDidFailToLoadAd')
+    prev[event] = (evt) => { console.log(evt.type, evt.error) }  
   else
     prev[event] = (evt) => { console.log(evt.type) }      
   return prev

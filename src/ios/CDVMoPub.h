@@ -10,6 +10,10 @@
 
 - (void)init:(CDVInvokedUrlCommand*)command;
 
+/* WIP: Consent
+- (void)showConsentDialog:(CDVInvokedUrlCommand*)command;
+*/
+
 - (void)loadInterstitial:(CDVInvokedUrlCommand*)command;
 
 - (void)isInterstitialReady:(CDVInvokedUrlCommand*)command;
